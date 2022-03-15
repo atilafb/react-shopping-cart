@@ -1,15 +1,10 @@
 import Product from './Product'
 
 const ProductsList = ({ items }) => {
-    return(
-    <div>
-            {
-                items.map((item) => {
-                    return <Product key={item.name} {...item} />
-                })
-            }
-    </div>
-    )
+  return (
+    items.map((item) => (
+      <Product key={item.name} {...item} />
+    ))
+  );
 }
-
 export default ProductsList;
