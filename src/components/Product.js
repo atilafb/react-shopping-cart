@@ -1,5 +1,5 @@
-const Product = ({name, description}) => {
-    return (<div key={name}> {name}: {description} </div>)
-  }
+const Product = ({ name, description }) => {
+  return (<div> {name}: {description} </div>)
+}
 
 export default Product;
