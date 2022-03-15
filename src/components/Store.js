@@ -18,10 +18,14 @@ const PRODUCTS = [
   }
 ];
 
+const SHOPPING_CART = [];
+
 function Store() {
   const [tabToShow, setTabToShow] = useState('products')
   const showProducts = tabToShow === 'products'
   const showCart = tabToShow === 'cart'
+
+  const addToCart = () => {}
 
   const handleProductClick = () => {
     setTabToShow('products')
@@ -37,7 +41,7 @@ function Store() {
         <button onClick={handleProductClick}>Products</button>
         <button onClick={handleShoppingCartClick}>Cart</button>
       </div>
-      {showProducts && <ProductsList items={PRODUCTS} />}
+      {showProducts && <ProductsList items={PRODUCTS} addToCart={addToCart} />}
       {showCart && <Cart />}
     </>
   );
