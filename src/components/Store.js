@@ -24,10 +24,8 @@ function Store() {
   const [tabToShow, setTabToShow] = useState('products')
   const showProducts = tabToShow === 'products'
   const showCart = tabToShow === 'cart'
-  
-  const addToCart = (item) => {
-    return [...SHOPPING_CART, item]
-  }
+
+  const addToCart = () => {}
 
   const handleProductClick = () => {
     setTabToShow('products')
