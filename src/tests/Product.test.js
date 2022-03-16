@@ -12,7 +12,9 @@ describe('<Product />', () => {
     render(<Product product={{ name: 'coisa', description: 'uma coisa' }} addToCart={() => { }} />)
     expect(screen.getByRole('button', {name: "Add to Cart"})).toBeInTheDocument()
   })
+})
 
+describe('when add cart button clicked', () => {
   it('should calls the addCart function', () => {
     const addCartFunction = jest.fn()
     render(<Product product={{ name: 'coisa', description: 'uma coisa' }} addToCart={addCartFunction} />)
@@ -20,6 +22,6 @@ describe('<Product />', () => {
     const addCartButton = screen.getByRole('button', {name: "Add to Cart"})
     userEvent.click(addCartButton)
 
-    expect(addCartFunction).toHaveBeenCalled()
+    expect(addCartFunction).toHaveBeenCalledWith({ name: 'coisa', description: 'uma coisa' })
   })
 })
