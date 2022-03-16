@@ -38,9 +38,9 @@ function Store() {
   }
 
   const addToCart = (params) => {
-    const productWithinCart = cartItems.find((object) => object.id === params.id)
+    const hasProductInCart = cartItems.some((object) => object.id === params.id)
 
-    if (productWithinCart === undefined) {
+    if (!hasProductInCart) {
       setCartItems([...cartItems, params])
     }
   }
