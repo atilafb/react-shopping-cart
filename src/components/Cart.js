@@ -1,7 +1,9 @@
+import Product from './Product'
+
 const Cart = ({ items }) => {
   return (
     items.map((item) => (
-      <div key={item.id}>{item.name}: {item.description}</div>
+      <Product key={item.id} product={item} />
     ))
   );
 }

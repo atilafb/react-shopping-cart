@@ -1,4 +1,4 @@
-const Product = ({ product, addToCart }) => {
+const Product = ({ product, addToCart = () => {} }) => {
 const { name, description } = product
 
 const handleAddToCart = () => {
