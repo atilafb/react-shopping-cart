@@ -37,17 +37,17 @@ function Store() {
     setTabToShow('cart')
   }
 
-  const addToCart = (params) => {
-    const hasProductInCart = cartItems.some((object) => object.id === params.id)
+  const addToCart = (product) => {
+    const hasProductInCart = cartItems.some((object) => object.id === product.id)
 
     if (!hasProductInCart) {
-      setCartItems([...cartItems, params])
+      setCartItems([...cartItems, product])
     }
   }
 
-  const removeFromCart = (params) => {
-    const withdrawFromCart = cartItems.filter((object) => object.id !== params.id)
-    setCartItems(withdrawFromCart)
+  const removeFromCart = (cartItem) => {
+    const updatedCartItems = cartItems.filter((object) => object.id !== cartItem.id)
+    setCartItems(updatedCartItems)
   }
 
   return (
