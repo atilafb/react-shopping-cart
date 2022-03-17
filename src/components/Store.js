@@ -45,6 +45,11 @@ function Store() {
     }
   }
 
+  const removeFromCart = (params) => {
+    const withdrawFromCart = cartItems.filter((object) => object.id !== params.id)
+    setCartItems(withdrawFromCart)
+  }
+
   return (
     <>
       <div>
@@ -52,7 +57,7 @@ function Store() {
         <button onClick={handleShoppingCartClick}>Cart</button>
       </div>
       {showProducts && <ProductsList items={PRODUCTS} addToCart={addToCart} />}
-      {showCart && <Cart items={cartItems} />}
+      {showCart && <Cart items={cartItems} removeFromCart={removeFromCart}/>}
     </>
   );
 }
