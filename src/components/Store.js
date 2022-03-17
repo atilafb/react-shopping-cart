@@ -37,12 +37,17 @@ function Store() {
     setTabToShow('cart')
   }
 
-  const addToCart = (params) => {
-    const hasProductInCart = cartItems.some((object) => object.id === params.id)
+  const addToCart = (product) => {
+    const hasProductInCart = cartItems.some((object) => object.id === product.id)
 
     if (!hasProductInCart) {
-      setCartItems([...cartItems, params])
+      setCartItems([...cartItems, product])
     }
+  }
+
+  const removeFromCart = (cartItem) => {
+    const updatedCartItems = cartItems.filter((object) => object.id !== cartItem.id)
+    setCartItems(updatedCartItems)
   }
 
   return (
@@ -52,7 +57,7 @@ function Store() {
         <button onClick={handleShoppingCartClick}>Cart</button>
       </div>
       {showProducts && <ProductsList items={PRODUCTS} addToCart={addToCart} />}
-      {showCart && <Cart items={cartItems} />}
+      {showCart && <Cart items={cartItems} removeFromCart={removeFromCart}/>}
     </>
   );
 }
