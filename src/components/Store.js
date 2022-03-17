@@ -5,27 +5,29 @@ import ProductsList from './ProductsList';
 
 const PRODUCTS = [
   {
+    id: 1,
     name: 'Caneta',
     description: 'Uma caneta'
   },
   {
+    id: 2,
     name: 'Lapis',
     description: 'Um lapis'
   },
   {
+    id: 3,
     name: 'Caderno',
     description: 'Um caderno'
   }
 ];
 
-const SHOPPING_CART = [];
 
 function Store() {
   const [tabToShow, setTabToShow] = useState('products')
   const showProducts = tabToShow === 'products'
   const showCart = tabToShow === 'cart'
 
-  const addToCart = () => {}
+  const [cartItems, setCartItems] = useState([])
 
   const handleProductClick = () => {
     setTabToShow('products')
@@ -35,6 +37,14 @@ function Store() {
     setTabToShow('cart')
   }
 
+  const addToCart = (params) => {
+    const hasProductInCart = cartItems.some((object) => object.id === params.id)
+
+    if (!hasProductInCart) {
+      setCartItems([...cartItems, params])
+    }
+  }
+
   return (
     <>
       <div>
@@ -42,7 +52,7 @@ function Store() {
         <button onClick={handleShoppingCartClick}>Cart</button>
       </div>
       {showProducts && <ProductsList items={PRODUCTS} addToCart={addToCart} />}
-      {showCart && <Cart />}
+      {showCart && <Cart items={cartItems} />}
     </>
   );
 }

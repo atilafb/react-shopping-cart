@@ -1,6 +1,10 @@
-const Cart = () => {
+import Product from './Product'
+
+const Cart = ({ items }) => {
   return (
-    <p>Empty Cart</p>
+    items.map((item) => (
+      <Product key={item.id} product={item} />
+    ))
   );
 }
 
