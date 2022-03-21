@@ -1,10 +1,19 @@
 import CartItem from './CartItem'
 
-const Cart = ({ items, removeFromCart }) => {
+const Cart = ({ items, removeFromCart, moveToCheckout }) => {
+
+  const handleCheckoutClick = () => {
+    moveToCheckout();
+  }
   return (
-    items.map((item) => (
-      <CartItem key={item.id} product={item} removeFromCart={removeFromCart} />
-    ))
+    <>
+      <button onClick={handleCheckoutClick}>Checkout</button>
+      {
+        items.map((item) => (
+          <CartItem key={item.id} product={item} removeFromCart={removeFromCart} />
+        ))
+      }
+    </>
   );
 }
 
