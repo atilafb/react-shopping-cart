@@ -55,4 +55,20 @@ describe('<Store />', () => {
       expect(screen.queryByText(/lapis: um lapis/i)).not.toBeInTheDocument()
     })
   })
+
+  describe('when click on Checkout button', () => {
+    it('renders the Checkout page', () => {
+      render(<Store />)
+      const cartPageButton = screen.getByRole('button', {name: 'Cart'})
+      userEvent.click(cartPageButton)
+
+      expect(screen.getByRole('button', {name: 'Checkout'})).toBeInTheDocument()
+      
+      const checkoutPageButton = screen.getByRole('button', {name: 'Checkout'})
+      userEvent.click(checkoutPageButton)
+
+      expect(screen.getByText('Checkout')).toBeInTheDocument()
+      
+    })
+  })
 })
