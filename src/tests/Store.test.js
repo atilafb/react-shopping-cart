@@ -61,14 +61,12 @@ describe('<Store />', () => {
       render(<Store />)
       const cartPageButton = screen.getByRole('button', {name: 'Cart'})
       userEvent.click(cartPageButton)
-
-      expect(screen.getByRole('button', {name: 'Checkout'})).toBeInTheDocument()
-      
       const checkoutPageButton = screen.getByRole('button', {name: 'Checkout'})
-      userEvent.click(checkoutPageButton)
-
-      expect(screen.getByText('Checkout')).toBeInTheDocument()
       
+      expect(checkoutPageButton).toBeInTheDocument()
+      
+      userEvent.click(checkoutPageButton)
+      expect(screen.getByText('Checkout')).toBeInTheDocument()
     })
   })
 })
