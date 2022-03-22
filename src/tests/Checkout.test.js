@@ -10,16 +10,16 @@ describe('<Checkout />', () => {
 
   it('renders Shipping Address name', () => {
     render(<Checkout />)
-    expect(screen.getAllByText('Shipping address')[0]).toBeInTheDocument()
+    expect(screen.getAllByText('Shipping address')[1]).toBeInTheDocument()
   })
 
   describe('when click Next button', () => {
     it('renders the Payment method name', () => {
       render(<Checkout />)
       const nextButton = screen.getByRole('button', {name: 'Next'})
+      
       userEvent.click(nextButton)
-
-      expect(screen.getByText('Payment method')).toBeInTheDocument
+      expect(screen.getByText('Payment method')).toBeInTheDocument()
     })
   })
 
@@ -27,12 +27,12 @@ describe('<Checkout />', () => {
     it('renders the Order summary name', () => {
       render(<Checkout />)
       const nextButton = screen.getByRole('button', {name: 'Next'})
+      
       userEvent.click(nextButton)
-
-      expect(screen.getByText('Payment method')).toBeInTheDocument
+      expect(screen.getByText('Payment method')).toBeInTheDocument()
+      
       userEvent.click(nextButton)
-
-      expect(screen.getByText('Order summary')).toBeInTheDocument
+      expect(screen.getByText('Order summary')).toBeInTheDocument()
     })
   })
 })
