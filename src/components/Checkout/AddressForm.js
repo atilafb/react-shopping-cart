@@ -4,8 +4,27 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import countryData from '../../assets/countries_states.json'
 
 export default function AddressForm() {
+
+  const [country, setCountry] = React.useState('');
+  const [province, setProvince] = React.useState('');
+
+  const availableState = countryData.countries.find((params) => params.country === country)
+
+  const handleCountryChange = (event) => {
+    setCountry(event.target.value);
+  };
+
+  const handleProvinceChange = (event) => {
+    setProvince(event.target.value);
+  };
+  
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -78,24 +97,36 @@ export default function AddressForm() {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="country"
-            name="country"
-            label="Country"
-            fullWidth
-            autoComplete="shipping country"
-            variant="standard"
-          />
+          <FormControl fullWidth>
+            <InputLabel id="country">Country</InputLabel>
+            <Select
+              labelId="country"
+              id="country"
+              value={country}
+              label="Country"
+              onChange={handleCountryChange}
+            >
+              {countryData.countries.map((country) =>(
+                <MenuItem key={country.country} value={country.country}>{country.country}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField
-            id="state"
-            name="state"
-            label="State/Province/Region"
-            fullWidth
-            variant="standard"
-          />
+          <FormControl fullWidth>
+            <InputLabel id="state">State/Province/Region</InputLabel>
+            <Select
+              labelId="state"
+              id="state"
+              value={province}
+              label="State/Province/Region"
+              onChange={handleProvinceChange}
+            >
+              {availableState?.states.map((state) => (
+                <MenuItem key={state} value={state}>{state}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </Grid>
         <Grid item xs={12}>
           <FormControlLabel
