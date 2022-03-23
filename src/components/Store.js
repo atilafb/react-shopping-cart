@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Cart from './Cart'
 import ProductsList from './ProductsList';
+import Checkout from './Checkout'
 
 
 const PRODUCTS = [
@@ -26,6 +27,7 @@ function Store() {
   const [tabToShow, setTabToShow] = useState('products')
   const showProducts = tabToShow === 'products'
   const showCart = tabToShow === 'cart'
+  const showCheckout = tabToShow === 'checkout'
 
   const [cartItems, setCartItems] = useState([])
 
@@ -50,6 +52,10 @@ function Store() {
     setCartItems(updatedCartItems)
   }
 
+  const moveToCheckout = () => {
+    setTabToShow('checkout')
+  }
+
   return (
     <>
       <div>
@@ -57,7 +63,8 @@ function Store() {
         <button onClick={handleShoppingCartClick}>Cart</button>
       </div>
       {showProducts && <ProductsList items={PRODUCTS} addToCart={addToCart} />}
-      {showCart && <Cart items={cartItems} removeFromCart={removeFromCart}/>}
+      {showCart && <Cart items={cartItems} removeFromCart={removeFromCart} moveToCheckout={moveToCheckout}/>}
+      {showCheckout && <Checkout />}
     </>
   );
 }
