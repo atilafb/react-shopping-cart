@@ -8,14 +8,14 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import countryData from '../../assets/countries_states.json'
+import COUNTRIES_STATES from '../../constants/countriesStates.json'
 
 export default function AddressForm() {
 
   const [country, setCountry] = React.useState('');
   const [province, setProvince] = React.useState('');
 
-  const availableState = countryData.countries.find((params) => params.country === country)
+  const countrySelectedObj = COUNTRIES_STATES.countries.find((countryObj) => countryObj.country === country)
 
   const handleCountryChange = (event) => {
     setCountry(event.target.value);
@@ -106,7 +106,7 @@ export default function AddressForm() {
               label="Country"
               onChange={handleCountryChange}
             >
-              {countryData.countries.map((country) =>(
+              {COUNTRIES_STATES.countries.map((country) =>(
                 <MenuItem key={country.country} value={country.country}>{country.country}</MenuItem>
               ))}
             </Select>
@@ -122,7 +122,7 @@ export default function AddressForm() {
               label="State/Province/Region"
               onChange={handleProvinceChange}
             >
-              {availableState?.states.map((state) => (
+              {countrySelectedObj?.states.map((state) => (
                 <MenuItem key={state} value={state}>{state}</MenuItem>
               ))}
             </Select>
