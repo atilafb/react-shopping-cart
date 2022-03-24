@@ -1,29 +1,24 @@
 import * as React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
-import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import Toolbar from '@mui/material/Toolbar';
 import Paper from '@mui/material/Paper';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
-import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
 
-
-
 const steps = ['Shipping address', 'Payment details', 'Review your order'];
 
-function getStepContent(step) {
+function getStepContent(step, onChange, formValues, errors) {
   switch (step) {
     case 0:
-      return <AddressForm />;
+      return <AddressForm onChange={onChange} formValues={formValues} errors={errors}/>;
     case 1:
       return <PaymentForm />;
     case 2:
@@ -35,8 +30,26 @@ function getStepContent(step) {
 
 const theme = createTheme();
 
+const getIsFormValid = (formValues, errors, step) => {
+  if (step === 0) {
+    if (errors.firstName || !formValues.firstName) {
+      return false
+    }
+  }
+  return true
+}
+
+const getFormErrors = (formValues) => {
+  const errors = {}
+  if (formValues.firstName === '') {
+    errors.firstName = 'First name field should not be empty'
+  }
+  return errors
+}
+
 export default function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
+  const [formValues, setFormValues] = React.useState({})
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -46,10 +59,16 @@ export default function Checkout() {
     setActiveStep(activeStep - 1);
   };
 
+  const onFormChange = (fieldName, fieldValue) => {
+    setFormValues({...formValues, [fieldName]:fieldValue})
+  }
+
+  const errors = getFormErrors(formValues)
+  const isValid = getIsFormValid(formValues, errors, activeStep)
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
         <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
           <Typography component="h1" variant="h4" align="center">
@@ -76,7 +95,7 @@ export default function Checkout() {
               </React.Fragment>
             ) : (
               <React.Fragment>
-                {getStepContent(activeStep)}
+                {getStepContent(activeStep, onFormChange, formValues, errors)}
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                   {activeStep !== 0 && (
                     <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
@@ -85,6 +104,7 @@ export default function Checkout() {
                   )}
 
                   <Button
+                    disabled={!isValid}
                     variant="contained"
                     onClick={handleNext}
                     sx={{ mt: 3, ml: 1 }}

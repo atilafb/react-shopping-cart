@@ -10,20 +10,26 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import COUNTRIES_STATES from '../../constants/countriesStates.json'
 
-export default function AddressForm() {
+export default function AddressForm({ onChange, formValues, errors }) {
 
-  const [country, setCountry] = React.useState('');
-  const [province, setProvince] = React.useState('');
+  const firstName = formValues.firstName || ''
+  const countrySelected = formValues.country || ''
+  const provinceSelected = formValues.province || ''
 
-  const countrySelectedObj = COUNTRIES_STATES.countries.find((countryObj) => countryObj.country === country)
-
+  const handleChangeFirstName = (event) => {
+    onChange('firstName', event.target.value)
+  }
+  
   const handleCountryChange = (event) => {
-    setCountry(event.target.value);
+    onChange('country', event.target.value)
   };
 
   const handleProvinceChange = (event) => {
-    setProvince(event.target.value);
+    onChange('province', event.target.value)
   };
+
+  const countrySelectedObj = COUNTRIES_STATES.countries.find((countryObj) => countryObj.country === countrySelected)
+
   
   return (
     <React.Fragment>
@@ -40,6 +46,10 @@ export default function AddressForm() {
             fullWidth
             autoComplete="given-name"
             variant="standard"
+            value={firstName}
+            onChange={handleChangeFirstName}
+            error={errors?.firstName}
+            helperText={errors?.firstName}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -100,9 +110,10 @@ export default function AddressForm() {
           <FormControl fullWidth>
             <InputLabel id="country">Country</InputLabel>
             <Select
+              required
               labelId="country"
               id="country"
-              value={country}
+              value={countrySelected}
               label="Country"
               onChange={handleCountryChange}
             >
@@ -114,11 +125,11 @@ export default function AddressForm() {
         </Grid>
         <Grid item xs={12} sm={6}>
           <FormControl fullWidth>
-            <InputLabel id="state">State/Province/Region</InputLabel>
+            <InputLabel id="province">State/Province/Region</InputLabel>
             <Select
-              labelId="state"
-              id="state"
-              value={province}
+              labelId="province"
+              id="province"
+              value={provinceSelected}
               label="State/Province/Region"
               onChange={handleProvinceChange}
             >
