@@ -22,7 +22,7 @@ function getStepContent(step, onChange, formValues, errors) {
     case 1:
       return <PaymentForm onChange={onChange} formValues={formValues} errors={errors}/>;
     case 2:
-      return <Review />;
+      return <Review formValues={formValues}/>;
     default:
       throw new Error('Unknown step');
   }
