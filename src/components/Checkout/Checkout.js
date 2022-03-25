@@ -20,7 +20,7 @@ function getStepContent(step, onChange, formValues, errors) {
     case 0:
       return <AddressForm onChange={onChange} formValues={formValues} errors={errors}/>;
     case 1:
-      return <PaymentForm />;
+      return <PaymentForm onChange={onChange} formValues={formValues} errors={errors}/>;
     case 2:
       return <Review />;
     default:
@@ -35,6 +35,34 @@ const getIsFormValid = (formValues, errors, step) => {
     if (errors.firstName || !formValues.firstName) {
       return false
     }
+    if (errors.lastName || !formValues.lastName) {
+      return false
+    }
+    if (errors.address1 || !formValues.address1) {
+      return false
+    }
+    if (errors.zip || !formValues.zip) {
+      return false
+    }
+    if (errors.city || !formValues.city) {
+      return false
+    }
+    if (!formValues.country) {
+      return false
+    }
+  }else if (step=== 1) {
+    if (errors.cardName || !formValues.cardName) {
+      return false
+    }
+    if (errors.cardNumber || !formValues.cardNumber) {
+      return false
+    }
+    if (errors.expiryDate || !formValues.expiryDate) {
+      return false
+    }
+    if (errors.cvvNumber || !formValues.cvvNumber) {
+      return false
+    } 
   }
   return true
 }
@@ -43,6 +71,30 @@ const getFormErrors = (formValues) => {
   const errors = {}
   if (formValues.firstName === '') {
     errors.firstName = 'First name field should not be empty'
+  }
+  if (formValues.lastName === '') {
+    errors.lastName = 'Last name field should not be empty'
+  }
+  if (formValues.address1 === '') {
+    errors.address1 = 'Address 1 field should not be empty'
+  }
+  if (formValues.zip === '') {
+    errors.zip = 'Zip / Postal code field should not be empty'
+  }
+  if (formValues.city === '') {
+    errors.city = 'City field should not be empty'
+  }
+  if (formValues.cardName === '') {
+    errors.cardName = 'Card Name should not be empty'
+  }
+  if (formValues.cardNumber === '') {
+    errors.cardNumber = 'Card Number should not be empty'
+  }
+  if (formValues.expiryDate === '') {
+    errors.expiryDate = 'Expiry Date should not be empty'
+  }
+  if (formValues.cvvNumber === '') {
+    errors.cvvNumber = 'CVV Number should not be empty'
   }
   return errors
 }

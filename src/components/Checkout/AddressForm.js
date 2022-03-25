@@ -7,17 +7,43 @@ import Checkbox from '@mui/material/Checkbox';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
+import FormHelperText from '@mui/material/FormHelperText';
 import Select from '@mui/material/Select';
 import COUNTRIES_STATES from '../../constants/countriesStates.json'
 
 export default function AddressForm({ onChange, formValues, errors }) {
 
   const firstName = formValues.firstName || ''
+  const lastName = formValues.lastName || ''
+  const address1 = formValues.address1 || ''
+  const address2 = formValues.address2 || ''
+  const zip = formValues.zip || ''
+  const city = formValues.city || ''
   const countrySelected = formValues.country || ''
   const provinceSelected = formValues.province || ''
 
   const handleChangeFirstName = (event) => {
     onChange('firstName', event.target.value)
+  }
+
+  const handleChangeLastName = (event) => {
+    onChange('lastName', event.target.value)
+  }
+
+  const handleChangeAddress1 = (event) => {
+    onChange('address1', event.target.value)
+  }
+
+  const handleChangeAddress2 = (event) => {
+    onChange('address2', event.target.value)
+  }
+
+  const handleChangeCity = (event) => {
+    onChange('city', event.target.value)
+  }
+
+  const handleChangeZip = (event) => {
+    onChange('zip', event.target.value)
   }
   
   const handleCountryChange = (event) => {
@@ -48,7 +74,7 @@ export default function AddressForm({ onChange, formValues, errors }) {
             variant="standard"
             value={firstName}
             onChange={handleChangeFirstName}
-            error={errors?.firstName}
+            error={errors.firstName ? true : false}
             helperText={errors?.firstName}
           />
         </Grid>
@@ -61,6 +87,10 @@ export default function AddressForm({ onChange, formValues, errors }) {
             fullWidth
             autoComplete="family-name"
             variant="standard"
+            value={lastName}
+            onChange={handleChangeLastName}
+            error={errors.lastName ? true : false}
+            helperText={errors?.lastName}
           />
         </Grid>
         <Grid item xs={12}>
@@ -72,6 +102,10 @@ export default function AddressForm({ onChange, formValues, errors }) {
             fullWidth
             autoComplete="shipping address-line1"
             variant="standard"
+            value={address1}
+            onChange={handleChangeAddress1}
+            error={errors.address1 ? true : false}
+            helperText={errors?.address1}
           />
         </Grid>
         <Grid item xs={12}>
@@ -82,6 +116,8 @@ export default function AddressForm({ onChange, formValues, errors }) {
             fullWidth
             autoComplete="shipping address-line2"
             variant="standard"
+            value={address2}
+            onChange={handleChangeAddress2}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -93,6 +129,10 @@ export default function AddressForm({ onChange, formValues, errors }) {
             fullWidth
             autoComplete="shipping postal-code"
             variant="standard"
+            value={zip}
+            onChange={handleChangeZip}
+            error={errors.zip  ? true : false}
+            helperText={errors?.zip}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -104,13 +144,16 @@ export default function AddressForm({ onChange, formValues, errors }) {
             fullWidth
             autoComplete="shipping address-level2"
             variant="standard"
+            value={city}
+            onChange={handleChangeCity}
+            error={errors.city  ? true : false}
+            helperText={errors?.city}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <FormControl fullWidth>
+          <FormControl required fullWidth>
             <InputLabel id="country">Country</InputLabel>
             <Select
-              required
               labelId="country"
               id="country"
               value={countrySelected}
@@ -121,6 +164,7 @@ export default function AddressForm({ onChange, formValues, errors }) {
                 <MenuItem key={country.country} value={country.country}>{country.country}</MenuItem>
               ))}
             </Select>
+            <FormHelperText>Required field</FormHelperText>
           </FormControl>
         </Grid>
         <Grid item xs={12} sm={6}>
