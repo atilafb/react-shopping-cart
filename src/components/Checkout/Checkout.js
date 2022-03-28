@@ -67,23 +67,20 @@ const getIsFormValid = (formValues, errors, step) => {
   return true
 }
 
-const getFormErrors = (formValues) => {
+const getAddressFormErrors = (formValues) => {
+  const isFirstNameNotEmpty = formValues.firstName === ''
+
+  return {
+    ...(isFirstNameNotEmpty ? { firstName: 'First name field should not be empty' } : {}),
+    ...(formValues.lastName === '' ? { lastName: 'Last name field should not be empty' } : {}),
+    ...(formValues.address1 === '' ? { address1: 'Address 1 field should not be empty' } : {}),
+    ...(formValues.zip === '' ? { zip: 'Zip / Postal code field should not be empty' } : {}),
+    ...(formValues.city === '' ? { city: 'City field should not be empty' } : {})
+  }
+}
+
+const getPaymentFormErrors = (formValues) => {
   const errors = {}
-  if (formValues.firstName === '') {
-    errors.firstName = 'First name field should not be empty'
-  }
-  if (formValues.lastName === '') {
-    errors.lastName = 'Last name field should not be empty'
-  }
-  if (formValues.address1 === '') {
-    errors.address1 = 'Address 1 field should not be empty'
-  }
-  if (formValues.zip === '') {
-    errors.zip = 'Zip / Postal code field should not be empty'
-  }
-  if (formValues.city === '') {
-    errors.city = 'City field should not be empty'
-  }
   if (formValues.cardName === '') {
     errors.cardName = 'Card Name should not be empty'
   }
@@ -98,6 +95,11 @@ const getFormErrors = (formValues) => {
   }
   return errors
 }
+
+const getFormErrors = (formValues) => ({
+  ...getAddressFormErrors(formValues),
+  ...getPaymentFormErrors(formValues)
+})
 
 export default function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
