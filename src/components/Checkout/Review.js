@@ -30,7 +30,7 @@ export default function Review({ formValues, cartItem }) {
     { name: 'Expiry date', detail: expiryDate }
   ];
 
-  const totalPrice = cartItem.map((item) => Number(item.price)).reduce((previousValue, currentValue) => previousValue + currentValue);
+  const totalPrice = cartItem.map((item) => Number(item.price)).reduce((previousValue, currentValue) => previousValue + currentValue, 0);
 
   return (
     <React.Fragment>
