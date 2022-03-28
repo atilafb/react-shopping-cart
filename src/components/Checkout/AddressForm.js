@@ -13,19 +13,22 @@ import COUNTRIES_STATES from '../../constants/countriesStates.json'
 
 export default function AddressForm({ onChange, formValues, errors }) {
 
-  const firstName = formValues.firstName || ''
-  const lastName = formValues.lastName || ''
-  const address1 = formValues.address1 || ''
-  const address2 = formValues.address2 || ''
-  const zip = formValues.zip || ''
-  const city = formValues.city || ''
+  const {
+    firstName = '',
+    lastName = '',
+    address1 = '',
+    address2 = '',
+    zip = '',
+    city = ''
+  } = formValues
+
   const countrySelected = formValues.country || ''
   const provinceSelected = formValues.province || ''
 
   const handleChange = (event) => {
     onChange(event.target.name, event.target.value)
   }
-    
+
   const handleCountryChange = (event) => {
     onChange('country', event.target.value)
   };
@@ -35,7 +38,6 @@ export default function AddressForm({ onChange, formValues, errors }) {
   };
 
   const countrySelectedObj = COUNTRIES_STATES.countries.find((countryObj) => countryObj.country === countrySelected)
-
   
   return (
     <React.Fragment>
@@ -54,8 +56,8 @@ export default function AddressForm({ onChange, formValues, errors }) {
             variant="standard"
             value={firstName}
             onChange={handleChange}
-            error={errors.firstName ? true : false}
-            helperText={errors?.firstName}
+            error={Boolean(errors.firstName)}
+            helperText={errors.firstName}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -69,8 +71,8 @@ export default function AddressForm({ onChange, formValues, errors }) {
             variant="standard"
             value={lastName}
             onChange={handleChange}
-            error={errors.lastName ? true : false}
-            helperText={errors?.lastName}
+            error={Boolean(errors.lastName)}
+            helperText={errors.lastName}
           />
         </Grid>
         <Grid item xs={12}>
@@ -84,8 +86,8 @@ export default function AddressForm({ onChange, formValues, errors }) {
             variant="standard"
             value={address1}
             onChange={handleChange}
-            error={errors.address1 ? true : false}
-            helperText={errors?.address1}
+            error={Boolean(errors.address1)}
+            helperText={errors.address1}
           />
         </Grid>
         <Grid item xs={12}>
@@ -111,8 +113,8 @@ export default function AddressForm({ onChange, formValues, errors }) {
             variant="standard"
             value={zip}
             onChange={handleChange}
-            error={errors.zip  ? true : false}
-            helperText={errors?.zip}
+            error={Boolean(errors.zip)}
+            helperText={errors.zip}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -126,8 +128,8 @@ export default function AddressForm({ onChange, formValues, errors }) {
             variant="standard"
             value={city}
             onChange={handleChange}
-            error={errors.city  ? true : false}
-            helperText={errors?.city}
+            error={Boolean(errors.city)}
+            helperText={errors.city}
           />
         </Grid>
         <Grid item xs={12} sm={6}>

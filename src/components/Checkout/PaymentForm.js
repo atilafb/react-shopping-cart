@@ -7,10 +7,12 @@ import Checkbox from '@mui/material/Checkbox';
 
 export default function PaymentForm({ onChange, formValues, errors }) {
 
-  const cardName = formValues.cardName || ''
-  const cardNumber = formValues.cardNumber || ''
-  const expiryDate = formValues.expiryDate || ''
-  const cvvNumber = formValues.cvvNumber || ''
+  const {
+    cardName = '',
+    cardNumber = '',
+    expiryDate = '',
+    cvvNumber = ''
+  } = formValues
 
   const handleChangeCardName = (event) => {
     onChange('cardName', event.target.value)
