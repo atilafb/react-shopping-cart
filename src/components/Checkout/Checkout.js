@@ -117,6 +117,10 @@ export default function Checkout() {
     setFormValues({...formValues, [fieldName]:fieldValue})
   }
 
+  const onFormSubmit = (event) => {
+    event.preventDefault();
+  }
+
   const errors = getFormErrors(formValues)
   const isValid = getIsFormValid(formValues, errors, activeStep)
 
@@ -124,7 +128,7 @@ export default function Checkout() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
-        <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+        <Paper component="form" onSubmit={onFormSubmit} variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
           <Typography component="h1" variant="h4" align="center">
             Checkout
           </Typography>
@@ -158,6 +162,7 @@ export default function Checkout() {
                   )}
 
                   <Button
+                    type="submit"
                     disabled={!isValid}
                     variant="contained"
                     onClick={handleNext}
