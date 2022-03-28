@@ -46,8 +46,8 @@ export default function PaymentForm({ onChange, formValues, errors }) {
             variant="standard"
             value={cardName}
             onChange={handleChangeCardName}
-            error={errors.cardName ? true : false}
-            helperText={errors?.cardName}
+            error={Boolean(errors.cardName)}
+            helperText={errors.cardName}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -60,8 +60,8 @@ export default function PaymentForm({ onChange, formValues, errors }) {
             variant="standard"
             value={cardNumber}
             onChange={handleChangeCardNumber}
-            error={errors.cardNumber ? true : false}
-            helperText={errors?.cardNumber}
+            error={Boolean(errors.cardNumber)}
+            helperText={errors.cardNumber}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -74,8 +74,8 @@ export default function PaymentForm({ onChange, formValues, errors }) {
             variant="standard"
             value={expiryDate}
             onChange={handleChangeExpiryDate}
-            error={errors.expiryDate ? true : false}
-            helperText={errors?.expiryDate}
+            error={Boolean(errors.expiryDate)}
+            helperText={errors.expiryDate}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -89,8 +89,8 @@ export default function PaymentForm({ onChange, formValues, errors }) {
             variant="standard"
             value={cvvNumber}
             onChange={handleChangeCvvNumber}
-            error={errors.cvvNumber ? true : false}
-            helperText={errors?.cvvNumber}
+            error={Boolean(errors.cvvNumber)}
+            helperText={errors.cvvNumber}
           />
         </Grid>
         <Grid item xs={12}>
