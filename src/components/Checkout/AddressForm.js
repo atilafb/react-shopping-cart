@@ -22,30 +22,10 @@ export default function AddressForm({ onChange, formValues, errors }) {
   const countrySelected = formValues.country || ''
   const provinceSelected = formValues.province || ''
 
-  const handleChangeFirstName = (event) => {
-    onChange('firstName', event.target.value)
+  const handleChange = (event) => {
+    onChange(event.target.name, event.target.value)
   }
-
-  const handleChangeLastName = (event) => {
-    onChange('lastName', event.target.value)
-  }
-
-  const handleChangeAddress1 = (event) => {
-    onChange('address1', event.target.value)
-  }
-
-  const handleChangeAddress2 = (event) => {
-    onChange('address2', event.target.value)
-  }
-
-  const handleChangeCity = (event) => {
-    onChange('city', event.target.value)
-  }
-
-  const handleChangeZip = (event) => {
-    onChange('zip', event.target.value)
-  }
-  
+    
   const handleCountryChange = (event) => {
     onChange('country', event.target.value)
   };
@@ -73,7 +53,7 @@ export default function AddressForm({ onChange, formValues, errors }) {
             autoComplete="given-name"
             variant="standard"
             value={firstName}
-            onChange={handleChangeFirstName}
+            onChange={handleChange}
             error={errors.firstName ? true : false}
             helperText={errors?.firstName}
           />
@@ -88,7 +68,7 @@ export default function AddressForm({ onChange, formValues, errors }) {
             autoComplete="family-name"
             variant="standard"
             value={lastName}
-            onChange={handleChangeLastName}
+            onChange={handleChange}
             error={errors.lastName ? true : false}
             helperText={errors?.lastName}
           />
@@ -103,7 +83,7 @@ export default function AddressForm({ onChange, formValues, errors }) {
             autoComplete="shipping address-line1"
             variant="standard"
             value={address1}
-            onChange={handleChangeAddress1}
+            onChange={handleChange}
             error={errors.address1 ? true : false}
             helperText={errors?.address1}
           />
@@ -117,7 +97,7 @@ export default function AddressForm({ onChange, formValues, errors }) {
             autoComplete="shipping address-line2"
             variant="standard"
             value={address2}
-            onChange={handleChangeAddress2}
+            onChange={handleChange}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -130,7 +110,7 @@ export default function AddressForm({ onChange, formValues, errors }) {
             autoComplete="shipping postal-code"
             variant="standard"
             value={zip}
-            onChange={handleChangeZip}
+            onChange={handleChange}
             error={errors.zip  ? true : false}
             helperText={errors?.zip}
           />
@@ -145,7 +125,7 @@ export default function AddressForm({ onChange, formValues, errors }) {
             autoComplete="shipping address-level2"
             variant="standard"
             value={city}
-            onChange={handleChangeCity}
+            onChange={handleChange}
             error={errors.city  ? true : false}
             helperText={errors?.city}
           />
