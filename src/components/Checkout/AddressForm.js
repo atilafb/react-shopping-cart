@@ -7,23 +7,37 @@ import Checkbox from '@mui/material/Checkbox';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
+import FormHelperText from '@mui/material/FormHelperText';
 import Select from '@mui/material/Select';
 import COUNTRIES_STATES from '../../constants/countriesStates.json'
 
-export default function AddressForm() {
+export default function AddressForm({ onChange, formValues, errors }) {
 
-  const [country, setCountry] = React.useState('');
-  const [province, setProvince] = React.useState('');
+  const {
+    firstName = '',
+    lastName = '',
+    address1 = '',
+    address2 = '',
+    zip = '',
+    city = ''
+  } = formValues
 
-  const countrySelectedObj = COUNTRIES_STATES.countries.find((countryObj) => countryObj.country === country)
+  const countrySelected = formValues.country || ''
+  const provinceSelected = formValues.province || ''
+
+  const handleChange = (event) => {
+    onChange(event.target.name, event.target.value)
+  }
 
   const handleCountryChange = (event) => {
-    setCountry(event.target.value);
+    onChange('country', event.target.value)
   };
 
   const handleProvinceChange = (event) => {
-    setProvince(event.target.value);
+    onChange('province', event.target.value)
   };
+
+  const countrySelectedObj = COUNTRIES_STATES.countries.find((countryObj) => countryObj.country === countrySelected)
   
   return (
     <React.Fragment>
@@ -40,6 +54,10 @@ export default function AddressForm() {
             fullWidth
             autoComplete="given-name"
             variant="standard"
+            value={firstName}
+            onChange={handleChange}
+            error={Boolean(errors.firstName)}
+            helperText={errors.firstName}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -51,6 +69,10 @@ export default function AddressForm() {
             fullWidth
             autoComplete="family-name"
             variant="standard"
+            value={lastName}
+            onChange={handleChange}
+            error={Boolean(errors.lastName)}
+            helperText={errors.lastName}
           />
         </Grid>
         <Grid item xs={12}>
@@ -62,6 +84,10 @@ export default function AddressForm() {
             fullWidth
             autoComplete="shipping address-line1"
             variant="standard"
+            value={address1}
+            onChange={handleChange}
+            error={Boolean(errors.address1)}
+            helperText={errors.address1}
           />
         </Grid>
         <Grid item xs={12}>
@@ -72,6 +98,8 @@ export default function AddressForm() {
             fullWidth
             autoComplete="shipping address-line2"
             variant="standard"
+            value={address2}
+            onChange={handleChange}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -83,6 +111,10 @@ export default function AddressForm() {
             fullWidth
             autoComplete="shipping postal-code"
             variant="standard"
+            value={zip}
+            onChange={handleChange}
+            error={Boolean(errors.zip)}
+            helperText={errors.zip}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -94,15 +126,19 @@ export default function AddressForm() {
             fullWidth
             autoComplete="shipping address-level2"
             variant="standard"
+            value={city}
+            onChange={handleChange}
+            error={Boolean(errors.city)}
+            helperText={errors.city}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <FormControl fullWidth>
+          <FormControl required fullWidth>
             <InputLabel id="country">Country</InputLabel>
             <Select
               labelId="country"
               id="country"
-              value={country}
+              value={countrySelected}
               label="Country"
               onChange={handleCountryChange}
             >
@@ -110,15 +146,16 @@ export default function AddressForm() {
                 <MenuItem key={country.country} value={country.country}>{country.country}</MenuItem>
               ))}
             </Select>
+            <FormHelperText>Required field</FormHelperText>
           </FormControl>
         </Grid>
         <Grid item xs={12} sm={6}>
           <FormControl fullWidth>
-            <InputLabel id="state">State/Province/Region</InputLabel>
+            <InputLabel id="province">State/Province/Region</InputLabel>
             <Select
-              labelId="state"
-              id="state"
-              value={province}
+              labelId="province"
+              id="province"
+              value={provinceSelected}
               label="State/Province/Region"
               onChange={handleProvinceChange}
             >

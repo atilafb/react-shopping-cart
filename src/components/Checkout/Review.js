@@ -29,15 +29,30 @@ const products = [
   { name: 'Shipping', desc: '', price: 'Free' },
 ];
 
-const addresses = ['1 MUI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
-const payments = [
-  { name: 'Card type', detail: 'Visa' },
-  { name: 'Card holder', detail: 'Mr John Smith' },
-  { name: 'Card number', detail: 'xxxx-xxxx-xxxx-1234' },
-  { name: 'Expiry date', detail: '04/2024' },
-];
 
-export default function Review() {
+export default function Review({ formValues }) {
+  const firstName = formValues.firstName || ''
+  const lastName = formValues.lastName || ''
+  const address1 = formValues.address1 || ''
+  const address2 = formValues.address2 || ''
+  const zip = formValues.zip || ''
+  const city = formValues.city || ''
+  const country = formValues.country || ''
+  const province = formValues.province || ''
+
+  const cardName = formValues.cardName || ''
+  const cardNumber = formValues.cardNumber || ''
+  const expiryDate = formValues.expiryDate || ''
+
+  const maskedNumber = cardNumber.slice(-4)
+
+  const addresses = [address1, address2, city, zip, country, province];
+  const payments = [
+    { name: 'Card holder', detail: cardName },
+    { name: 'Card number', detail: 'XXXX-XXXX-XXXX-' + maskedNumber },
+    { name: 'Expiry date', detail: expiryDate }
+  ];
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -63,7 +78,7 @@ export default function Review() {
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
             Shipping
           </Typography>
-          <Typography gutterBottom>John Smith</Typography>
+          <Typography gutterBottom>{firstName} {lastName}</Typography>
           <Typography gutterBottom>{addresses.join(', ')}</Typography>
         </Grid>
         <Grid item container direction="column" xs={12} sm={6}>

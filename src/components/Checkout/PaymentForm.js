@@ -5,7 +5,31 @@ import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 
-export default function PaymentForm() {
+export default function PaymentForm({ onChange, formValues, errors }) {
+
+  const {
+    cardName = '',
+    cardNumber = '',
+    expiryDate = '',
+    cvvNumber = ''
+  } = formValues
+
+  const handleChangeCardName = (event) => {
+    onChange('cardName', event.target.value)
+  }
+
+  const handleChangeCardNumber = (event) => {
+    onChange('cardNumber', event.target.value)
+  }
+
+  const handleChangeExpiryDate = (event) => {
+    onChange('expiryDate', event.target.value)
+  }
+
+  const handleChangeCvvNumber = (event) => {
+    onChange('cvvNumber', event.target.value)
+  }
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -20,6 +44,10 @@ export default function PaymentForm() {
             fullWidth
             autoComplete="cc-name"
             variant="standard"
+            value={cardName}
+            onChange={handleChangeCardName}
+            error={Boolean(errors.cardName)}
+            helperText={errors.cardName}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -30,6 +58,10 @@ export default function PaymentForm() {
             fullWidth
             autoComplete="cc-number"
             variant="standard"
+            value={cardNumber}
+            onChange={handleChangeCardNumber}
+            error={Boolean(errors.cardNumber)}
+            helperText={errors.cardNumber}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -40,6 +72,10 @@ export default function PaymentForm() {
             fullWidth
             autoComplete="cc-exp"
             variant="standard"
+            value={expiryDate}
+            onChange={handleChangeExpiryDate}
+            error={Boolean(errors.expiryDate)}
+            helperText={errors.expiryDate}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -51,6 +87,10 @@ export default function PaymentForm() {
             fullWidth
             autoComplete="cc-csc"
             variant="standard"
+            value={cvvNumber}
+            onChange={handleChangeCvvNumber}
+            error={Boolean(errors.cvvNumber)}
+            helperText={errors.cvvNumber}
           />
         </Grid>
         <Grid item xs={12}>
