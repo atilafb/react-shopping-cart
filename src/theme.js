@@ -12,8 +12,7 @@ const colors = {
 const space = [0, 4, 8, 16, 32, 64, 128, 256]
 
 const fonts = {
-  body:
-    'Roboto'
+  fontFamily: 'Roboto'
 }
 
 const fontSizes = [0, 8, 10, 12, 14, 16, 18, 20, 24, 28, 32, 36, 40]
