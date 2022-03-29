@@ -29,8 +29,7 @@ const PRODUCTS = [
 const Button = styled.button`
   width: 60px;
   height: 60px;
-  background-color: ${({ theme }) => theme.colors.red}
-  ${(props) => { console.log(props) }}
+  background-color: ${({ theme }) => theme.colors.red};
 `
 
 const Button3 = (props) =>
