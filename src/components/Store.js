@@ -8,17 +8,20 @@ const PRODUCTS = [
   {
     id: 1,
     name: 'Caneta',
-    description: 'Uma caneta'
+    description: 'Uma caneta',
+    price: '2.50'
   },
   {
     id: 2,
     name: 'Lapis',
-    description: 'Um lapis'
+    description: 'Um lapis',
+    price: '1.00'
   },
   {
     id: 3,
     name: 'Caderno',
-    description: 'Um caderno'
+    description: 'Um caderno',
+    price: '20.00'
   }
 ];
 
@@ -64,7 +67,7 @@ function Store() {
       </div>
       {showProducts && <ProductsList items={PRODUCTS} addToCart={addToCart} />}
       {showCart && <Cart items={cartItems} removeFromCart={removeFromCart} moveToCheckout={moveToCheckout}/>}
-      {showCheckout && <Checkout />}
+      {showCheckout && <Checkout cartItem={cartItems}/>}
     </>
   );
 }
