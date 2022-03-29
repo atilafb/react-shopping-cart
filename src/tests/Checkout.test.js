@@ -70,7 +70,14 @@ describe('<Checkout />', () => {
 
   describe('when click Next button two times', () => {
     it('renders the Order summary name', () => {
-      render(<Checkout />)
+      render(<Checkout cartItem={[
+        {
+          "id": 2,
+          "name": "Lapis",
+          "description": "Um lapis",
+          "price": "1.00"
+        }
+      ]}/>) 
       addressFormFields()
       const nextButton = screen.getByRole('button', { name: 'Next' })
       userEvent.click(nextButton)
