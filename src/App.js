@@ -1,9 +1,13 @@
 import './App.css';
+import { ThemeProvider } from 'styled-components'
+import theme from './theme'
 import Store from './components/Store'
 
 function App() {
   return (
-    <Store />
+    <ThemeProvider theme={theme}>
+      <Store />
+    </ThemeProvider>
   );
 }
 
