@@ -2,8 +2,6 @@ import { useState } from 'react'
 import Cart from './Cart'
 import ProductsList from './ProductsList';
 import Checkout from './Checkout'
-import styled from 'styled-components'
-import css from '@styled-system/css'
 
 const PRODUCTS = [
   {
@@ -25,23 +23,6 @@ const PRODUCTS = [
     price: '20.00'
   }
 ];
-
-const Button = styled.button`
-  width: 60px;
-  height: 60px;
-  background-color: ${({ theme }) => theme.colors.red};
-`
-
-const Button3 = (props) =>
-  <button
-    css={css({
-      width: 90,
-      height: 90,
-      backgroundColor: 'green'
-    })}
-    {...props}
-  />
-
 
 function Store() {
   const [tabToShow, setTabToShow] = useState('products')
@@ -85,15 +66,6 @@ function Store() {
       {showProducts && <ProductsList items={PRODUCTS} addToCart={addToCart} />}
       {showCart && <Cart items={cartItems} removeFromCart={removeFromCart} moveToCheckout={moveToCheckout} />}
       {showCheckout && <Checkout cartItem={cartItems} />}
-      <div>
-        <Button name='botao'>BOTAO 1</Button>
-
-        <Button name='botao2' css={css({
-          backgroundColor: 'blue'
-        })}>BOTAO 2</Button>
-
-        <Button3 name='botao3'>BOTAO 3</Button3>
-      </div>
     </>
   );
 }
