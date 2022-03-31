@@ -5,7 +5,5 @@ const MyInputLabel = styled.p`
   font-family: ${({ theme }) => theme.fonts.body};
   font-weight: ${({ theme }) => theme.fontWeights[2]};
   font-size: ${({ theme }) => theme.fontSizes[4]}px;
-  line-height: 1.4375em;
-  letter-spacing: 0.00938em;
 `
 export default MyInputLabel;
