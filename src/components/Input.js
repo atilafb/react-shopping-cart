@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 const Input = styled.input`
   font: inherit;
-  padding: ${({ theme }) => theme.space[1]}px 0 ${({ theme }) => theme.space[1]}px;
+  padding: ${({ theme }) => `${theme.space[1]} 0 ${theme.space[1]}`};
   border: 0;
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray};
   box-sizing: content-box;
